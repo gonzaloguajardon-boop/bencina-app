@@ -184,23 +184,14 @@ function Precios() {
       setCiudad(comuna);
       setEstado("buscando");
 
-      // Consulta a Claude con web search
-      const res = await fetch("https://api.anthropic.com/v1/messages", {
+      // Llama a la ruta interna de Next.js
+      const res = await fetch("/api/precios", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          model: "claude-sonnet-4-20250514",
-          max_tokens: 1000,
-          tools: [{ type: "web_search_20250305", name: "web_search" }],
-          messages: [{
-            role: "user",
-            content: `Busca el precio actual de la bencina 93, 95 y 97 octanos en ${comuna}, Chile, en mayo 2026. Usa bencinaenlinea.cl o fuentes recientes. Responde solo con los precios en formato simple: "93: $X · 95: $X · 97: $X" y agrega una línea con el promedio regional si lo encuentras. Sin explicaciones largas.`
-          }]
-        })
+        body: JSON.stringify({ ciudad: comuna }),
       });
       const data = await res.json();
-      const texto = data.content?.map((b: any) => b.text || "").filter(Boolean).join("\n") || "No se encontraron precios.";
-      setRespuesta(texto);
+      setRespuesta(data.precios || "Sin datos disponibles");
       setEstado("listo");
     } catch (e: any) {
       setEstado("error");
