@@ -160,7 +160,7 @@ function Precios() {
       const geoData = await geo.json();
       const comuna = geoData.address?.city || geoData.address?.town || geoData.address?.village || "tu zona";
       setCiudad(comuna);
-      setUrl(`https://www.bencinaenlinea.cl/#/${lat}/${lon}/15`);
+      setUrl(`https://www.bencinaenlinea.cl/?lat=${lat}&lng=${lon}`);
       setEstado("listo");
     } catch {
       setEstado("error");
