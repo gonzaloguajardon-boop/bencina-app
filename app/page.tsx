@@ -1,4 +1,1 @@
-import BencinaApp from "./BencinaApp";
-export default function Home() {
-  return <BencinaApp />;
-}
+export { default } from "./BencinaApp";
