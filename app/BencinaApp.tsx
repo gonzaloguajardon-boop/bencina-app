@@ -188,7 +188,7 @@ function Precios() {
       const res = await fetch("/api/precios", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ciudad: comuna }),
+        body: JSON.stringify({ lat, lon, ciudad: comuna }),
       });
       const data = await res.json();
       setRespuesta(data.precios || "Sin datos disponibles");
