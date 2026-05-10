@@ -1,58 +1,7 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const DAYS = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
-
-// Descuentos activos todos los días
-const SIEMPRE: any[] = [
-  { bencinera: "Shell",  tarjeta: "Banco Falabella",   descuento: 370, tipo: "Crédito",    condicion: "Solo nuevos clientes · App Shell · Tope $26.000 cashback/carga · Todos los días" },
-  { bencinera: "Copec",  tarjeta: "App Copec",          descuento: 30,  tipo: "App",        condicion: "Cupones disponibles en la app Copec · Varían según disponibilidad" },
-  { bencinera: "Copec",  tarjeta: "Santander Consumer", descuento: 50,  tipo: "Crédito",    condicion: "Clientes con crédito automotriz Santander Consumer al día · App Copec" },
-  { bencinera: "Copec",  tarjeta: "Caja Los Andes",     descuento: 15,  tipo: "Caja",       condicion: "$10/L con Copec Pay · $15/L con código web Caja Los Andes · Todos los días" },
-];
-
-const DISCOUNTS: Record<number, any[]> = {
-  0: [ // Domingo
-    { bencinera: "Aramco", tarjeta: "Spin Visa",        descuento: 150, tipo: "Crédito",    condicion: "Tarjeta física o App Aramco Estaciones · Tope $10.000/mes" },
-    { bencinera: "Shell",  tarjeta: "Banco BICE",       descuento: 100, tipo: "Crédito",    condicion: "App Shell · Tarjeta Limitless BICE · Tope $5.000/mes" },
-  ],
-  1: [ // Lunes
-    { bencinera: "Aramco", tarjeta: "Banco Consorcio",  descuento: 150, tipo: "Crédito",    condicion: "App Aramco Estaciones · Tope $10.000/mes · No acumulable" },
-    { bencinera: "Copec",  tarjeta: "Cencosud Scotiabank Black", descuento: 100, tipo: "Crédito", condicion: "App Copec · Black $100/L · Clásica/Platinum $50/L · Tope $10.000/mes" },
-    { bencinera: "Copec",  tarjeta: "Jumbo Prime",      descuento: 100, tipo: "Fidelización", condicion: "App Copec · Tope 100L/mes · Socios activos" },
-    { bencinera: "Copec",  tarjeta: "Mercado Pago",     descuento: 100, tipo: "Prepago",    condicion: "App Copec · Máx. 1 carga de 40L/mes por usuario" },
-  ],
-  2: [ // Martes
-    { bencinera: "Shell",  tarjeta: "Lider BCI",        descuento: 100, tipo: "Crédito",    condicion: "App Shell · Tope $4.000/carga · Máx. 2 cargas/mes por RUT" },
-    { bencinera: "Copec",  tarjeta: "Banco Internacional", descuento: 100, tipo: "Crédito", condicion: "App Copec · Mastercard Clásica, Gold o Black" },
-    { bencinera: "Copec",  tarjeta: "Itaú Legend",      descuento: 100, tipo: "Crédito",    condicion: "App Copec · Requiere cupón desde sitio web Itaú" },
-    { bencinera: "Copec",  tarjeta: "Rutpay BancoEstado", descuento: 100, tipo: "Débito",   condicion: "App Copec · Tope 50L/boleta · 1 vez por RUT/mes · No acumulable · Verificar vigencia" },
-    { bencinera: "Aramco", tarjeta: "Mercado Pago",     descuento: 50,  tipo: "Prepago",    condicion: "App Aramco Estaciones · Tope $5.000/mes por titular" },
-  ],
-  3: [ // Miércoles
-    { bencinera: "Aramco", tarjeta: "Ripley Gold",      descuento: 150, tipo: "Crédito",    condicion: "App Aramco o físico · Categoría Gold · Tope $8.000/mes" },
-    { bencinera: "Aramco", tarjeta: "Ripley Silver",    descuento: 125, tipo: "Crédito",    condicion: "App Aramco o físico · Categoría Silver · Tope $8.000/mes" },
-    { bencinera: "Aramco", tarjeta: "Ripley Plus",      descuento: 100, tipo: "Crédito",    condicion: "App Aramco o físico · Categoría Plus · Tope $8.000/mes" },
-    { bencinera: "Copec",  tarjeta: "Scotiabank Singular", descuento: 100, tipo: "Crédito", condicion: "App Copec · Tarjeta Singular Scotiabank" },
-    { bencinera: "Copec",  tarjeta: "Automóvil Club",   descuento: 50,  tipo: "Club",       condicion: "App Copec · Socios Plan Movilidad · Cupón semanal · Tope $10.000/mes" },
-    { bencinera: "Shell",  tarjeta: "Código MIDCTO",    descuento: 15,  tipo: "App",        condicion: "App Shell · Ingresa código MIDCTO · Tope 70L · 1 carga/día" },
-  ],
-  4: [ // Jueves
-    { bencinera: "Copec",  tarjeta: "Coopeuch Crédito", descuento: 200, tipo: "Crédito",    condicion: "App Copec · Abono en 10 días hábiles · Vigente hasta dic. 2026" },
-    { bencinera: "Aramco", tarjeta: "Abc Visa",         descuento: 200, tipo: "Crédito",    condicion: "App Aramco Estaciones · Tope $10.000/mes" },
-    { bencinera: "Copec",  tarjeta: "BCI Crédito",      descuento: null, porcentaje: 7, tipo: "Crédito", condicion: "Cashback vía App Copec · Tope $7.000/día" },
-    { bencinera: "Copec",  tarjeta: "Coopeuch Débito",  descuento: 100, tipo: "Débito",     condicion: "App Copec · Tarjeta débito Coopeuch (Dale) · Vigente hasta dic. 2026" },
-  ],
-  5: [ // Viernes
-    { bencinera: "Copec/Shell/Aramco", tarjeta: "Tenpo", descuento: 300, tipo: "Prepago",  condicion: "App de cada bencinera · Tope $4.000/carga · Máx. 2 cargas/mes · No acumulable" },
-    { bencinera: "Copec",  tarjeta: "Itaú Legend",      descuento: 100, tipo: "Crédito",    condicion: "App Copec · Requiere cupón desde sitio web Itaú" },
-  ],
-  6: [ // Sábado
-    { bencinera: "Shell",  tarjeta: "Scotiabank Visa",  descuento: 200, tipo: "Crédito",    condicion: "App Shell · Tope 50L/carga · Máx. 5 cargas/mes" },
-    { bencinera: "Copec",  tarjeta: "MACHBANK",         descuento: 100, tipo: "Crédito",    condicion: "App Copec · Tarjeta virtual MACHBANK · No acumulable" },
-    { bencinera: "Shell",  tarjeta: "Los Héroes Prepago", descuento: 100, tipo: "Prepago",  condicion: "App Shell · Cashback tarjeta prepago Los Héroes · Verificar tope" },
-  ],
-};
 
 const BRAND_COLORS: Record<string, string> = {
   Copec: "#E8192C", Shell: "#DD1D21", Aramco: "#00703C", "Copec/Shell/Aramco": "#7C3AED",
@@ -72,7 +21,7 @@ const s = {
   mono:     { fontFamily:"'Courier New',monospace" },
   card:     (top: boolean, color: string) => ({ background: top?"rgba(255,255,255,0.06)":"rgba(255,255,255,0.03)", border:`1px solid ${top?"rgba(255,255,255,0.15)":"rgba(255,255,255,0.07)"}`, borderLeft:`3px solid ${color}`, borderRadius:"14px", padding:"14px 16px", display:"flex", justifyContent:"space-between", alignItems:"center", gap:"12px" }),
   input:    { width:"100%", background:"rgba(255,255,255,0.06)", border:"1px solid rgba(255,255,255,0.12)", borderRadius:"12px", padding:"12px 16px", color:"#f1f5f9", fontSize:"16px", fontFamily:"Georgia,serif", outline:"none", boxSizing:"border-box" as const },
-  btn:      (active: boolean) => ({ flex:1, padding:"8px", borderRadius:"10px", border:"none", background:active?"rgba(255,255,255,0.1)":"transparent", color:active?"#f1f5f9":"#475569", fontSize:"13px", fontWeight:600, cursor:"pointer", fontFamily:"Georgia,serif" }),
+  btn:      (active: boolean) => ({ flex:1, padding:"6px 2px", borderRadius:"10px", border:"none", background:active?"rgba(255,255,255,0.1)":"transparent", color:active?"#f1f5f9":"#475569", fontSize:"11px", fontWeight:600, cursor:"pointer", fontFamily:"Georgia,serif" }),
   greenBox: { background:"linear-gradient(135deg,rgba(74,222,128,0.12),rgba(16,185,129,0.06))", border:"1px solid rgba(74,222,128,0.2)", borderRadius:"16px", padding:"16px", marginBottom:"16px" },
 };
 
@@ -105,26 +54,80 @@ function DiscountCard({ item, rank }: { item: any; rank: number }) {
   );
 }
 
-function SiempreSection() {
+function SiempreSection({ siempre }: { siempre: any[] }) {
   const [open, setOpen] = useState(false);
   return (
     <div style={{ marginBottom:"16px" }}>
       <button onClick={() => setOpen(!open)} style={{ width:"100%", background:"rgba(251,191,36,0.08)", border:"1px solid rgba(251,191,36,0.2)", borderRadius:"12px", padding:"10px 14px", display:"flex", justifyContent:"space-between", alignItems:"center", cursor:"pointer", color:"#fde68a", fontSize:"12px", fontWeight:600, fontFamily:"Georgia,serif" }}>
-        <span>⚡ Descuentos todos los días ({SIEMPRE.length})</span>
+        <span>⚡ Todos los días ({siempre.length})</span>
         <span>{open ? "▲" : "▼"}</span>
       </button>
       {open && (
         <div style={{ display:"flex", flexDirection:"column" as const, gap:"8px", marginTop:"8px" }}>
-          {SIEMPRE.map((item, i) => <DiscountCard key={i} item={item} rank={99} />)}
+          {siempre.map((item: any, i: number) => <DiscountCard key={i} item={item} rank={99} />)}
         </div>
       )}
     </div>
   );
 }
 
-function Calculadora({ today }: { today: number }) {
+function SinCosto({ dias, siempre, today }: { dias: any; siempre: any[]; today: number }) {
+  const todosLosDias = [...Object.values(dias).flat(), ...siempre] as any[];
+  const sinCosto = todosLosDias
+    .filter((d: any) => d.sinCosto)
+    .filter((d: any, i: number, arr: any[]) => arr.findIndex((x: any) => x.tarjeta === d.tarjeta) === i)
+    .sort((a: any, b: any) => (b.descuento||0) - (a.descuento||0));
+
+  // Agrupar por día
+  const porDia: Record<string, any[]> = {};
+  for (let i = 0; i < 7; i++) {
+    const d = (dias[i.toString()] || []).filter((x: any) => x.sinCosto);
+    if (d.length > 0) porDia[i] = d;
+  }
+  const siempreSinCosto = siempre.filter((x: any) => x.sinCosto);
+
+  return (
+    <div>
+      <div style={s.greenBox}>
+        <div style={{ fontSize:"10px", color:"#4ade80", ...s.mono, marginBottom:"4px" }}>💰 SIN COSTO DE MANTENCIÓN</div>
+        <div style={{ fontSize:"13px", color:"#94a3b8" }}>
+          Solo necesitas dinero en tu cuenta. Sin tarjetas de crédito ni cobros mensuales.
+        </div>
+      </div>
+
+      {siempreSinCosto.length > 0 && (
+        <>
+          <div style={{ fontSize:"11px", color:"#fde68a", ...s.mono, letterSpacing:"2px", marginBottom:"10px" }}>⚡ TODOS LOS DÍAS</div>
+          <div style={{ display:"flex", flexDirection:"column" as const, gap:"10px", marginBottom:"20px" }}>
+            {siempreSinCosto.map((item: any, i: number) => <DiscountCard key={i} item={item} rank={i} />)}
+          </div>
+        </>
+      )}
+
+      {Object.entries(porDia).map(([dia, items]) => (
+        <div key={dia} style={{ marginBottom:"20px" }}>
+          <div style={{ fontSize:"11px", color:"#64748b", ...s.mono, letterSpacing:"2px", marginBottom:"10px", display:"flex", alignItems:"center", gap:"8px" }}>
+            {DAYS[parseInt(dia)].toUpperCase()}
+            {parseInt(dia) === today && <span style={{ color:"#4ade80" }}>← HOY</span>}
+          </div>
+          <div style={{ display:"flex", flexDirection:"column" as const, gap:"10px" }}>
+            {(items as any[]).sort((a, b) => (b.descuento||0)-(a.descuento||0)).map((item: any, i: number) => (
+              <DiscountCard key={i} item={item} rank={i} />
+            ))}
+          </div>
+        </div>
+      ))}
+
+      <div style={{ background:"rgba(74,222,128,0.06)", border:"1px solid rgba(74,222,128,0.15)", borderRadius:"12px", padding:"12px 14px", fontSize:"12px", color:"#64748b", lineHeight:1.6 }}>
+        💡 <strong style={{ color:"#4ade80" }}>Tip:</strong> Tenpo los viernes es el mejor descuento sin costo — $300/L con tope $4.000 por carga.
+      </div>
+    </div>
+  );
+}
+
+function Calculadora({ today, dias, siempre }: { today: number; dias: any; siempre: any[] }) {
   const [litros, setLitros] = useState("");
-  const allDeals = [...(DISCOUNTS[today] || []), ...SIEMPRE].sort((a: any, b: any) => (b.descuento||0)-(a.descuento||0));
+  const allDeals = [...(dias[today.toString()] || []), ...siempre].sort((a: any, b: any) => (b.descuento||0)-(a.descuento||0));
   const L = parseFloat(litros) || 0;
   return (
     <div>
@@ -169,7 +172,7 @@ function Calculadora({ today }: { today: number }) {
           </div>
         </>
       )}
-      {!L && <div style={{ textAlign:"center" as const, padding:"30px", color:"#334155", fontSize:"13px" }}>Ingresa los litros para ver cuánto ahorras con cada tarjeta hoy</div>}
+      {!L && <div style={{ textAlign:"center" as const, padding:"30px", color:"#334155", fontSize:"13px" }}>Ingresa los litros para ver cuánto ahorras hoy</div>}
     </div>
   );
 }
@@ -228,16 +231,33 @@ export default function BencinaApp() {
   const today = new Date().getDay();
   const [selectedDay, setSelectedDay] = useState(today);
   const [view, setView] = useState("hoy");
+  const [data, setData] = useState<any>(null);
 
-  const todayDeals = (DISCOUNTS[today] || []).slice().sort((a: any, b: any) => (b.descuento||0)-(a.descuento||0));
-  const selectedDeals = (DISCOUNTS[selectedDay] || []).slice().sort((a: any, b: any) => (b.descuento||0)-(a.descuento||0));
-  const best = todayDeals[0] || SIEMPRE[0];
+  useEffect(() => {
+    fetch("/descuentos.json")
+      .then(r => r.json())
+      .then(setData)
+      .catch(() => setData(null));
+  }, []);
+
+  if (!data) return (
+    <div style={{ ...s.wrap, display:"flex", alignItems:"center", justifyContent:"center" }}>
+      <div style={{ color:"#4ade80", fontSize:"14px" }}>Cargando descuentos...</div>
+    </div>
+  );
+
+  const dias = data.dias || {};
+  const siempre = data.siempre || [];
+  const todayDeals = (dias[today.toString()] || []).slice().sort((a: any, b: any) => (b.descuento||0)-(a.descuento||0));
+  const selectedDeals = (dias[selectedDay.toString()] || []).slice().sort((a: any, b: any) => (b.descuento||0)-(a.descuento||0));
+  const best = todayDeals[0] || siempre[0];
 
   const tabs = [
-    { id:"hoy",     label:"📍 Hoy" },
-    { id:"semana",  label:"📅 Semana" },
-    { id:"calc",    label:"🧮 Ahorro" },
-    { id:"precios", label:"⛽ Precios" },
+    { id:"hoy",      label:"📍 Hoy" },
+    { id:"semana",   label:"📅 Semana" },
+    { id:"sincosto", label:"💰 Gratis" },
+    { id:"calc",     label:"🧮 Ahorro" },
+    { id:"precios",  label:"⛽ Precio" },
   ];
 
   return (
@@ -246,7 +266,8 @@ export default function BencinaApp() {
         <div style={{ display:"flex", justifyContent:"space-between", alignItems:"flex-start" }}>
           <div>
             <div style={{ fontSize:"11px", letterSpacing:"3px", color:"#475569", ...s.mono, marginBottom:"4px" }}>⛽ BENCINA 93 · PADRE HURTADO</div>
-            <div style={{ fontSize:"26px", fontWeight:700, lineHeight:1, color:"#f8fafc" }}>Descuentos</div>
+            <div style={{ fontSize:"13px", color:"#475569", ...s.mono }}>{data.mes}</div>
+            <div style={{ fontSize:"26px", fontWeight:700, lineHeight:1.1, color:"#f8fafc" }}>Descuentos</div>
             <div style={{ fontSize:"26px", fontWeight:700, lineHeight:1, color:"#4ade80" }}>del Día</div>
           </div>
           <div style={{ background:"rgba(74,222,128,0.1)", border:"1px solid rgba(74,222,128,0.25)", borderRadius:"12px", padding:"8px 14px", textAlign:"center" as const }}>
@@ -254,7 +275,7 @@ export default function BencinaApp() {
             <div style={{ fontSize:"18px", fontWeight:700, color:"#f1f5f9", lineHeight:1.2 }}>{DAYS[today]}</div>
           </div>
         </div>
-        <div style={{ display:"grid", gridTemplateColumns:"repeat(4,1fr)", gap:"4px", marginTop:"16px" }}>
+        <div style={{ display:"grid", gridTemplateColumns:"repeat(5,1fr)", gap:"4px", marginTop:"16px" }}>
           {tabs.map(t => <button key={t.id} onClick={() => setView(t.id)} style={s.btn(view===t.id)}>{t.label}</button>)}
         </div>
       </div>
@@ -277,10 +298,10 @@ export default function BencinaApp() {
                 </div>
               </div>
             )}
-            <SiempreSection />
-            {todayDeals.length === 0 && <div style={{ textAlign:"center" as const, padding:"20px", color:"#475569" }}>Sin descuentos exclusivos hoy.</div>}
+            <SiempreSection siempre={siempre} />
             <div style={{ display:"flex", flexDirection:"column" as const, gap:"10px" }}>
               {todayDeals.map((item: any, i: number) => <DiscountCard key={i} item={item} rank={i} />)}
+              {todayDeals.length===0 && <div style={{ textAlign:"center" as const, padding:"20px", color:"#475569" }}>Sin descuentos exclusivos hoy.</div>}
             </div>
           </>
         )}
@@ -289,7 +310,7 @@ export default function BencinaApp() {
           <>
             <div style={{ display:"grid", gridTemplateColumns:"repeat(7,1fr)", gap:"4px", marginBottom:"16px" }}>
               {DAYS.map((day, i) => {
-                const count = (DISCOUNTS[i]||[]).length;
+                const count = (dias[i.toString()]||[]).length;
                 const isTod = i===today, isSel = i===selectedDay;
                 return (
                   <button key={i} onClick={() => setSelectedDay(i)} style={{ padding:"8px 4px", borderRadius:"10px", border:isTod?"1px solid rgba(74,222,128,0.4)":"1px solid rgba(255,255,255,0.07)", background:isSel?"rgba(255,255,255,0.1)":"rgba(255,255,255,0.03)", color:isSel?"#f1f5f9":"#64748b", cursor:"pointer", textAlign:"center" as const }}>
@@ -304,7 +325,7 @@ export default function BencinaApp() {
               {DAYS[selectedDay].toUpperCase()} · {selectedDeals.length} descuento{selectedDeals.length!==1?"s":""}
               {selectedDay===today && <span style={{ color:"#4ade80", marginLeft:"8px" }}>← hoy</span>}
             </div>
-            <SiempreSection />
+            <SiempreSection siempre={siempre} />
             <div style={{ display:"flex", flexDirection:"column" as const, gap:"10px" }}>
               {selectedDeals.map((item: any, i: number) => <DiscountCard key={i} item={item} rank={i} />)}
               {selectedDeals.length===0 && <div style={{ textAlign:"center" as const, padding:"20px", color:"#334155" }}>Sin descuentos exclusivos este día</div>}
@@ -312,12 +333,13 @@ export default function BencinaApp() {
           </>
         )}
 
-        {view === "calc" && <Calculadora today={today} />}
+        {view === "sincosto" && <SinCosto dias={dias} siempre={siempre} today={today} />}
+        {view === "calc" && <Calculadora today={today} dias={dias} siempre={siempre} />}
         {view === "precios" && <Precios />}
 
         <div style={{ marginTop:"24px", padding:"12px", borderTop:"1px solid rgba(255,255,255,0.05)", fontSize:"10px", color:"#334155", textAlign:"center" as const, lineHeight:1.6 }}>
           Descuentos válidos en estaciones Copec, Shell y Aramco adheridas.<br />
-          Datos actualizados a mayo 2026 · Sujeto a cambios sin previo aviso.
+          Datos actualizados a {data.mes} · Sujeto a cambios sin previo aviso.
         </div>
       </div>
     </div>
