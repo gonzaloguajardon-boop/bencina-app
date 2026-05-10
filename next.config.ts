@@ -1,4 +1,5 @@
-import BencinaApp from "./BencinaApp";
-export default function Home() {
-  return <BencinaApp />;
-}
+import type { NextConfig } from "next";
+
+const nextConfig: NextConfig = {};
+
+export default nextConfig;
