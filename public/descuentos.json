@@ -1,283 +1,268 @@
 {
-  "meta": {
-    "mes": "Mayo 2026",
-    "precio_referencia_93": 1556,
-    "ultima_actualizacion": "2026-05-10",
-    "proxima_actualizacion": "2026-06-01",
-    "nota": "Precios congelados hasta el 28 de mayo por MEPCO. Baja de $28,1/L esta semana."
-  },
-  "todos_los_dias": [
+  "mes": "Mayo 2026",
+  "siempre": [
     {
       "bencinera": "Copec",
       "tarjeta": "App Copec",
-      "descuento_pesos": 30,
-      "tipo": "app",
-      "condicion": "Cupones disponibles en la app Copec",
-      "tope": null
+      "descuento": 30,
+      "tipo": "App",
+      "condicion": "Cupones disponibles directo en la app Copec",
+      "sinCosto": true
     },
     {
       "bencinera": "Copec",
       "tarjeta": "Caja Los Andes",
-      "descuento_pesos": 15,
-      "tipo": "caja_compensacion",
-      "condicion": "Ingresando código web Caja Los Andes. $10 pagando con Copec Pay",
-      "tope": null
-    },
-    {
-      "bencinera": "Copec",
-      "tarjeta": "Santander Consumer",
-      "descuento_pesos": 100,
-      "tipo": "credito",
-      "condicion": "Viernes a domingo. Clientes titulares crédito automotriz Santander Consumer al día. App Copec. Tope 70L",
-      "tope": 70
+      "descuento": 15,
+      "tipo": "Caja",
+      "condicion": "$15 con código web Caja Los Andes · $10 pagando con Copec Pay",
+      "sinCosto": false
     }
   ],
-  "por_dia": {
-    "lunes": [
-      {
-        "bencinera": "Aramco",
-        "tarjeta": "Banco Consorcio",
-        "descuento_pesos": 150,
-        "tipo": "credito",
-        "condicion": "App Aramco Estaciones. Tope $10.000/mes",
-        "tope_mensual": 10000
-      },
-      {
-        "bencinera": "Copec",
-        "tarjeta": "Cencosud Scotiabank Black",
-        "descuento_pesos": 100,
-        "tipo": "credito",
-        "condicion": "App Copec. Tarjeta Black. Tope $10.000/mes",
-        "tope_mensual": 10000
-      },
-      {
-        "bencinera": "Copec",
-        "tarjeta": "Cencosud Scotiabank Clásica/Platinum",
-        "descuento_pesos": 50,
-        "tipo": "credito",
-        "condicion": "App Copec. Tarjeta Clásica o Platinum",
-        "tope_mensual": null
-      },
-      {
-        "bencinera": "Copec",
-        "tarjeta": "Jumbo Prime",
-        "descuento_pesos": 100,
-        "tipo": "fidelizacion",
-        "condicion": "Código enviado desde Jumbo Prime. Máximo 100 litros",
-        "tope_litros": 100
-      },
-      {
-        "bencinera": "Copec",
-        "tarjeta": "Mercado Pago",
-        "descuento_pesos": 100,
-        "tipo": "prepago",
-        "condicion": "App Copec. Máx. 1 carga de 40L/mes",
-        "tope_litros": 40
-      }
-    ],
-    "martes": [
-      {
-        "bencinera": "Shell",
-        "tarjeta": "Lider BCI",
-        "descuento_pesos": 100,
-        "tipo": "credito",
-        "condicion": "App Shell. Tope $4.000 por carga. Máx. 2 cargas/mes",
-        "tope_mensual": 4000
-      },
-      {
-        "bencinera": "Copec",
-        "tarjeta": "Banco Internacional",
-        "descuento_pesos": 100,
-        "tipo": "credito",
-        "condicion": "App Copec. Mastercard Clásica, Gold o Black",
-        "tope_mensual": null
-      },
-      {
-        "bencinera": "Copec",
-        "tarjeta": "Itaú Legend",
-        "descuento_pesos": 100,
-        "tipo": "credito",
-        "condicion": "App Copec. Requiere cupón desde sitio Itaú Beneficios",
-        "tope_mensual": null
-      },
-      {
-        "bencinera": "Aramco",
-        "tarjeta": "Mercado Pago",
-        "descuento_pesos": 50,
-        "tipo": "prepago",
-        "condicion": "App Aramco. Tope $5.000/mes",
-        "tope_mensual": 5000
-      }
-    ],
-    "miercoles": [
-      {
-        "bencinera": "Aramco",
-        "tarjeta": "Ripley Gold",
-        "descuento_pesos": 150,
-        "tipo": "credito",
-        "condicion": "Tarjeta física o App Aramco. Categoría Gold. Tope $8.000/mes",
-        "tope_mensual": 8000
-      },
-      {
-        "bencinera": "Aramco",
-        "tarjeta": "Ripley Silver",
-        "descuento_pesos": 125,
-        "tipo": "credito",
-        "condicion": "Tarjeta física o App Aramco. Categoría Silver. Tope $8.000/mes",
-        "tope_mensual": 8000
-      },
-      {
-        "bencinera": "Aramco",
-        "tarjeta": "Ripley Plus",
-        "descuento_pesos": 100,
-        "tipo": "credito",
-        "condicion": "Tarjeta física o App Aramco. Categoría Plus. Tope $8.000/mes",
-        "tope_mensual": 8000
-      },
-      {
-        "bencinera": "Copec",
-        "tarjeta": "Scotiabank Visa",
-        "descuento_pesos": 100,
-        "tipo": "credito",
-        "condicion": "App Copec. Tarjeta Singular hasta $100/L",
-        "tope_mensual": null
-      },
-      {
-        "bencinera": "Shell",
-        "tarjeta": "Banco de Chile FAN",
-        "descuento_pesos": 50,
-        "tipo": "credito",
-        "condicion": "App Shell. Mediante código. Válido tarjeta FAN, débito y crédito",
-        "tope_mensual": null
-      },
-      {
-        "bencinera": "Copec",
-        "tarjeta": "Automóvil Club",
-        "descuento_pesos": 50,
-        "tipo": "club",
-        "condicion": "App Copec. Socios Plan Movilidad. Tope $10.000/mes",
-        "tope_mensual": 10000
-      }
-    ],
-    "jueves": [
-      {
-        "bencinera": "Copec",
-        "tarjeta": "Coopeuch Crédito",
-        "descuento_pesos": 200,
-        "tipo": "credito",
-        "condicion": "App Copec. Abono en cuenta en 10 días hábiles. Solo con boleta",
-        "tope_mensual": null
-      },
-      {
-        "bencinera": "Copec",
-        "tarjeta": "Coopeuch Débito/Prepago",
-        "descuento_pesos": 100,
-        "tipo": "debito",
-        "condicion": "App Copec. Tarjeta Dale Coopeuch",
-        "tope_mensual": null
-      },
-      {
-        "bencinera": "Copec",
-        "tarjeta": "BCI",
-        "descuento_porcentaje": 7,
-        "tipo": "credito",
-        "condicion": "Cashback. App Copec. Tope $7.000/día",
-        "tope_diario": 7000
-      },
-      {
-        "bencinera": "Aramco",
-        "tarjeta": "ABC Visa",
-        "descuento_pesos": 200,
-        "tipo": "credito",
-        "condicion": "App Aramco o tarjeta física. Tope $10.000/mes",
-        "tope_mensual": 10000
-      }
-    ],
-    "viernes": [
-      {
-        "bencinera": "Copec/Shell/Aramco",
-        "tarjeta": "Tenpo",
-        "descuento_pesos": 300,
-        "descuento_minimo": 50,
-        "tipo": "prepago",
-        "condicion": "App de cada bencinera. Tope $4.000 por carga. Máx. 2 cargas/mes. Compra mínima $5.000",
-        "tope_mensual": 8000
-      },
-      {
-        "bencinera": "Copec",
-        "tarjeta": "Itaú Legend",
-        "descuento_pesos": 100,
-        "tipo": "credito",
-        "condicion": "App Copec. Requiere cupón desde sitio Itaú Beneficios",
-        "tope_mensual": null
-      },
-      {
-        "bencinera": "Copec",
-        "tarjeta": "BancoEstado Rutpay",
-        "descuento_pesos": 100,
-        "tipo": "debito",
-        "condicion": "App Copec vía Rutpay",
-        "tope_mensual": null
-      }
-    ],
-    "sabado": [
-      {
-        "bencinera": "Shell",
-        "tarjeta": "Scotiabank Visa",
-        "descuento_pesos": 200,
-        "tipo": "credito",
-        "condicion": "App Shell. Tope 50L por carga. Máx. 5 cargas/mes",
-        "tope_litros": 50
-      },
-      {
-        "bencinera": "Copec",
-        "tarjeta": "MACHBANK",
-        "descuento_pesos": 100,
-        "tipo": "credito",
-        "condicion": "App Copec. Tarjeta virtual MACHBANK",
-        "tope_mensual": null
-      },
-      {
-        "bencinera": "Aramco",
-        "tarjeta": "SBPay",
-        "descuento_pesos": 150,
-        "tipo": "credito",
-        "condicion": "App Aramco. $100 con tarjeta física. Tope $10.000/mes",
-        "tope_mensual": 10000
-      }
-    ],
-    "domingo": [
-      {
-        "bencinera": "Shell",
-        "tarjeta": "Banco BICE",
-        "descuento_pesos": 100,
-        "tipo": "credito",
-        "condicion": "App Shell. Tarjeta Limitless BICE. Tope $5.000/mes",
-        "tope_mensual": 5000
-      },
+  "dias": {
+    "0": [
       {
         "bencinera": "Aramco",
         "tarjeta": "Spin Visa",
-        "descuento_pesos": 150,
-        "tipo": "credito",
-        "condicion": "Tarjeta física o App Aramco. Tope $10.000/mes",
-        "tope_mensual": 10000
+        "descuento": 150,
+        "tipo": "Crédito",
+        "condicion": "Tarjeta física o App Aramco Estaciones · Tope $10.000/mes",
+        "sinCosto": false
+      },
+      {
+        "bencinera": "Shell",
+        "tarjeta": "Banco BICE",
+        "descuento": 100,
+        "tipo": "Crédito",
+        "condicion": "App Shell · Tarjeta Limitless BICE · Tope $5.000/mes",
+        "sinCosto": false
       },
       {
         "bencinera": "Shell",
         "tarjeta": "Banco Security",
-        "descuento_pesos": 100,
-        "tipo": "credito",
-        "condicion": "App Shell. Tope $5.000 en 1 carga mensual",
-        "tope_mensual": 5000
+        "descuento": 100,
+        "tipo": "Crédito",
+        "condicion": "App Shell · Tope $5.000 en 1 carga mensual",
+        "sinCosto": false
       },
       {
         "bencinera": "Aramco",
         "tarjeta": "Hites",
-        "descuento_pesos": 100,
-        "tipo": "tienda",
-        "condicion": "Tarjeta Hites. Estaciones Aramco adheridas",
-        "tope_mensual": null
+        "descuento": 100,
+        "tipo": "Crédito",
+        "condicion": "Tarjeta Hites · Estaciones Aramco adheridas",
+        "sinCosto": false
+      }
+    ],
+    "1": [
+      {
+        "bencinera": "Aramco",
+        "tarjeta": "Banco Consorcio",
+        "descuento": 150,
+        "tipo": "Crédito",
+        "condicion": "App Aramco Estaciones · Tope $10.000/mes",
+        "sinCosto": false
+      },
+      {
+        "bencinera": "Copec",
+        "tarjeta": "Cencosud Scotiabank Black",
+        "descuento": 100,
+        "tipo": "Crédito",
+        "condicion": "App Copec · Tarjeta Black · Tope $10.000/mes",
+        "sinCosto": false
+      },
+      {
+        "bencinera": "Copec",
+        "tarjeta": "Jumbo Prime",
+        "descuento": 100,
+        "tipo": "Fidelización",
+        "condicion": "Código enviado desde Jumbo Prime · Máximo 100 litros",
+        "sinCosto": false
+      },
+      {
+        "bencinera": "Copec",
+        "tarjeta": "Mercado Pago",
+        "descuento": 100,
+        "tipo": "Prepago",
+        "condicion": "App Copec · Máx. 1 carga de 40L al mes",
+        "sinCosto": true
+      },
+      {
+        "bencinera": "Copec",
+        "tarjeta": "Cencosud Scotiabank Clásica/Platinum",
+        "descuento": 50,
+        "tipo": "Crédito",
+        "condicion": "App Copec · Tarjeta Clásica o Platinum",
+        "sinCosto": false
+      }
+    ],
+    "2": [
+      {
+        "bencinera": "Shell",
+        "tarjeta": "Lider BCI",
+        "descuento": 100,
+        "tipo": "Crédito",
+        "condicion": "App Shell · Tope $4.000 por carga · Máx. 2 cargas/mes",
+        "sinCosto": false
+      },
+      {
+        "bencinera": "Copec",
+        "tarjeta": "Banco Internacional",
+        "descuento": 100,
+        "tipo": "Crédito",
+        "condicion": "App Copec · Mastercard Clásica, Gold o Black",
+        "sinCosto": false
+      },
+      {
+        "bencinera": "Copec",
+        "tarjeta": "Itaú Legend",
+        "descuento": 100,
+        "tipo": "Crédito",
+        "condicion": "App Copec · Requiere cupón desde sitio Itaú Beneficios",
+        "sinCosto": false
+      },
+      {
+        "bencinera": "Aramco",
+        "tarjeta": "Mercado Pago",
+        "descuento": 50,
+        "tipo": "Prepago",
+        "condicion": "App Aramco Estaciones · Tope $5.000/mes",
+        "sinCosto": true
+      }
+    ],
+    "3": [
+      {
+        "bencinera": "Aramco",
+        "tarjeta": "Ripley Gold",
+        "descuento": 150,
+        "tipo": "Crédito",
+        "condicion": "Tarjeta física o App Aramco · Categoría Gold · Tope $8.000/mes",
+        "sinCosto": false
+      },
+      {
+        "bencinera": "Aramco",
+        "tarjeta": "Ripley Silver",
+        "descuento": 125,
+        "tipo": "Crédito",
+        "condicion": "Tarjeta física o App Aramco · Categoría Silver · Tope $8.000/mes",
+        "sinCosto": false
+      },
+      {
+        "bencinera": "Aramco",
+        "tarjeta": "Ripley Plus",
+        "descuento": 100,
+        "tipo": "Crédito",
+        "condicion": "Tarjeta física o App Aramco · Categoría Plus · Tope $8.000/mes",
+        "sinCosto": false
+      },
+      {
+        "bencinera": "Copec",
+        "tarjeta": "Scotiabank Visa",
+        "descuento": 100,
+        "tipo": "Crédito",
+        "condicion": "App Copec · Tarjeta Singular hasta $100/L",
+        "sinCosto": false
+      },
+      {
+        "bencinera": "Shell",
+        "tarjeta": "Banco de Chile FAN",
+        "descuento": 50,
+        "tipo": "Crédito",
+        "condicion": "App Shell · Mediante código · Tarjeta FAN, débito o crédito",
+        "sinCosto": false
+      },
+      {
+        "bencinera": "Copec",
+        "tarjeta": "Automóvil Club",
+        "descuento": 50,
+        "tipo": "Club",
+        "condicion": "App Copec · Socios Plan Movilidad · Tope $10.000/mes",
+        "sinCosto": false
+      }
+    ],
+    "4": [
+      {
+        "bencinera": "Copec",
+        "tarjeta": "Coopeuch Crédito",
+        "descuento": 200,
+        "tipo": "Crédito",
+        "condicion": "App Copec · Abono en cuenta en 10 días hábiles · Solo con boleta",
+        "sinCosto": false
+      },
+      {
+        "bencinera": "Aramco",
+        "tarjeta": "ABC Visa",
+        "descuento": 200,
+        "tipo": "Crédito",
+        "condicion": "App Aramco o tarjeta física · Tope $10.000/mes",
+        "sinCosto": false
+      },
+      {
+        "bencinera": "Copec",
+        "tarjeta": "BCI",
+        "porcentaje": 7,
+        "tipo": "Crédito",
+        "condicion": "Cashback · App Copec · Tope $7.000/día",
+        "sinCosto": false
+      },
+      {
+        "bencinera": "Copec",
+        "tarjeta": "Coopeuch Débito",
+        "descuento": 100,
+        "tipo": "Débito",
+        "condicion": "App Copec · Tarjeta Dale Coopeuch",
+        "sinCosto": false
+      }
+    ],
+    "5": [
+      {
+        "bencinera": "Copec/Shell/Aramco",
+        "tarjeta": "Tenpo",
+        "descuento": 300,
+        "tipo": "Prepago",
+        "condicion": "App de cada bencinera · Tope $4.000/carga · Máx. 2 cargas/mes · Compra mín. $5.000",
+        "sinCosto": true
+      },
+      {
+        "bencinera": "Copec",
+        "tarjeta": "BancoEstado Rutpay",
+        "descuento": 100,
+        "tipo": "Débito",
+        "condicion": "App Copec vía Rutpay",
+        "sinCosto": false
+      },
+      {
+        "bencinera": "Copec",
+        "tarjeta": "Itaú Legend",
+        "descuento": 100,
+        "tipo": "Crédito",
+        "condicion": "App Copec · Requiere cupón desde sitio Itaú Beneficios",
+        "sinCosto": false
+      }
+    ],
+    "6": [
+      {
+        "bencinera": "Shell",
+        "tarjeta": "Scotiabank Visa",
+        "descuento": 200,
+        "tipo": "Crédito",
+        "condicion": "App Shell · Tope 50L por carga · Máx. 5 cargas/mes",
+        "sinCosto": false
+      },
+      {
+        "bencinera": "Aramco",
+        "tarjeta": "SBPay",
+        "descuento": 150,
+        "tipo": "Crédito",
+        "condicion": "App Aramco · $100 con tarjeta física · Tope $10.000/mes",
+        "sinCosto": false
+      },
+      {
+        "bencinera": "Copec",
+        "tarjeta": "MACHBANK",
+        "descuento": 100,
+        "tipo": "Crédito",
+        "condicion": "App Copec · Tarjeta virtual MACHBANK",
+        "sinCosto": false
       }
     ]
   }
